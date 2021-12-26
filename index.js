@@ -9,8 +9,11 @@ const { dbConnection } = require('./database/config.js');
 //Crear el servidor de Express
 const app = express();
 
-//Configurar CORS
+//Middleware - Configurar CORS
 app.use(cors());
+
+//Middleware - Lectura y parseo del body
+app.use(express.json());
 
 //Lamamos a la base de datos despues de la configuracion de Express
 dbConnection()
@@ -25,13 +28,16 @@ dbConnection()
 
 
 
-app.get('/', function(req, res) {
 
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    });
-})
+//Middleware
+//Tenemos una raiz comun que es 'api/usuarios' y vamos a requerir lo que se 
+// encuentra en el archivo especificado por require. Es decir cualquier cosa
+// que entre por 'api/usuarios' redirecionamos a './routes/usuarios'
+
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
+
+
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en el puerto ' + process.env.PORT);
