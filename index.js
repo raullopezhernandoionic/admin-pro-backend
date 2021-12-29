@@ -34,10 +34,21 @@ dbConnection()
 // encuentra en el archivo especificado por require. Es decir cualquier cosa
 // que entre por 'api/usuarios' redirecionamos a './routes/usuarios'
 
+//Rutas Usuarios
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/login', require('./routes/auth'));
 
+//Ruta hospital
+app.use('/api/hospitales', require('./routes/hospitales'));
 
+//Ruta medicos
+app.use('/api/medicos', require('./routes/medicos'));
+
+//Ruta busqueda 
+app.use('/api/todo', require('./routes/busquedas'));
+
+//Ruta upload o subida de archivos
+app.use('/api/upload', require('./routes/uploads'));
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en el puerto ' + process.env.PORT);
