@@ -18,6 +18,9 @@ app.use(express.json());
 //Lamamos a la base de datos despues de la configuracion de Express
 dbConnection()
 
+//Directorio Publico
+app.use(express.static('public'));
+
 //Usuario y Contraseña Base de datos (Mongo Atlas)
 //raul
 //nrPPcbCeV4qizfAs
